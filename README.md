@@ -9,21 +9,9 @@ There are a few items that need to be pre-configured in order to provide necessa
 
 * Allocate Public IP
 * Setup jumphost and use for SSH gateway
+* Install [vca-cli](https://github.com/vmware/vca-cli) tool
 * Configure network (NAT/Firewall) settings for SSH and internet access (currently using vca-cli tool)
-
-```
-vca firewall disable
-vca nat add --type DNAT --original-ip 107.189.67.75 --original-port 22 --translated-ip 192.168.109.2 --translated-port 22 --protocol tcp
-vca nat add --type DNAT --original-ip 107.189.67.75 --original-port 8002 --translated-ip 192.168.109.2 --translated-port 80 --protocol tcp
-vca nat add --type SNAT --original-ip 192.168.109.0/24 --translated-ip 107.189.67.75
-```
-
-* After VM is provisioned, needed to update firewall ON VM:
-
-```
-sudo iptables -I INPUT 4 -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT
-/etc/init.d/iptables save
-```
+* Use [vcair-network-setup script](./scripts/vcair-network-setup.sh) to setup necessary NAT rules
 
 
 # Lab 1 - Chef Introduction
@@ -160,4 +148,3 @@ Includes pre-configured items to help with limited time during workshop making i
 * VMware Integrated OpenStack
 	* [knife-openstack](https://github.com/chef/knife-openstack)
 	* [kitchen-openstack](https://github.com/test-kitchen/kitchen-openstack) 	
-

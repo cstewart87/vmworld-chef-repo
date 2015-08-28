@@ -1,0 +1,7 @@
+name 'hello_vmworld'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures hello_vmworld'
+long_description 'Installs/Configures hello_vmworld'
+version '0.1.0'

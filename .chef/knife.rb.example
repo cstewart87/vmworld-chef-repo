@@ -9,8 +9,8 @@ cookbook_path            ["#{current_dir}/../cookbooks"]
 # vCloud Air OnDemand Settings
 
 knife[:vcair_api_host] = "us-california-1-3.vchs.vmware.com"
-knife[:vcair_username] = "INSERT_USERNAME_HERE"
-knife[:vcair_password] = "INSERT_PASSWORD_HERE"
+knife[:vcair_username] = "INSERT_VCAIR_USERNAME_HERE"
+knife[:vcair_password] = "INSERT_VCAIR_PASSWORD_HERE"
 knife[:vcair_org]      = "f305cc3c-57ee-40ad-bca0-16a7d5d2a1f9"
 knife[:vcair_vdc]      = "ChefVDC1"
 knife[:vcair_api_path] = '/api/compute/api'

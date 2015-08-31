@@ -3,6 +3,8 @@
 ###
 .chef/*.pem
 .chef/encrypted_data_bag_secret
+.chef/knife.rb
+.chef/syntaxcache/
 
 ###
 # Ignore user-/org-specifc settings
@@ -10,3 +12,7 @@
 scripts/vcair.env
 .chef/chef.env
 
+Gemfile.lock
+
+*.zip
+vendor/

@@ -60,11 +60,6 @@ Includes pre-configured items to help with limited time during workshop making i
 ![Download User Pem](./img/chef-manage-download-user-pem.png?raw=true "Download User Pem")
 7. Add downloaded user pem to `/vmworld-chef-repo/.chef/[username].pem`
 
-## Create a Cookbook
-
-1. Use the Chef DK to generate a new cookbook
-
-		$ chef generate cookbook hello_vmworld
 
 # Lab 2 - vCloud Air + Chef
 
@@ -117,15 +112,25 @@ Includes pre-configured items to help with limited time during workshop making i
 
 5. Create and bootstrap vCloud Air VM
 
-		$ knife vcair server create \
-			--ssh-password ChangeMe \
-			--image "CentOS64-64BIT" \
-			--node-name YOURNAME-chef-node \
-			--vcair-net vmworld-routed-network \
-			--customization-script bootstrap/install-linux-vcair-example.sh \
-			--no-host-key-verify \
-			--run-list 'recipe[hello_vmworld::default]' \
-			--ssh-gateway root@GATEWAY_IP
+		knife vcair server create --ssh-password vmworld2015 --image "CentOS64-64BIT" --node-name YOURNAME-chef-node --customization-script bootstrap/install-linux-vcair-example.sh --run-list 'recipe[hello_vmworld::default]' --ssh-gateway root@107.189.120.118 --fog-version 1.33.0 --vcair-net chef-routed-network --no-host-key-verify
+
+# Troubleshooting
+
+### winrm gem Conflicts
+
+If you see something along these lines:
+
+```
+/opt/chefdk/embedded/lib/ruby/site_ruby/2.1.0/rubygems/specification.rb:2104:in `raise_if_conflicts': Unable to activate winrm-s-0.3.1, because winrm-1.2.0 conflicts with winrm (~> 1.3.0) (Gem::ConflictError)
+	from /opt/chefdk/embedded/lib/ruby/site_ruby/2.1.0/rubygems/specification.rb:1282:in `activate'
+	from /opt/chefdk/embedded/lib/ruby/site_ruby/2.1.0/rubygems/specification.rb:1316:in `block in activate_dependencies'
+	from /opt/chefdk/embedded/lib/ruby/site_ruby/2.1.0/rubygems/specification.rb:1302:in `each'
+	from /opt/chefdk/embedded/lib/ruby/site_ruby/2.1.0/rubygems/specification.rb:1302:in `activate_dependencies'
+	from /opt/chefdk/embedded/lib/ruby/site_ruby/2.1.0/rubygems/specification.rb:1284:in `activate'
+	from /opt/chefdk/embedded/lib/ruby/site_ruby/2.1.0/rubygems/core_ext/kernel_require.rb:117:in `require'
+```
+
+Try running `chef exec gem uninstall winrm -v 1.2.0`
 
 # References
 

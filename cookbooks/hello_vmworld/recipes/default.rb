@@ -9,7 +9,7 @@ package 'httpd' do
 end
 
 file '/var/www/html/index.html' do
-	content 'Hello VMworld!'
+	content "Hello VMworld, from #{node['hostname']} @ #{node['ipaddress']}!"
 	action :create
 end
 
